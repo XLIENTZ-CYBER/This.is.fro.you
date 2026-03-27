@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #ff9a9e 0%, #fad0c4 100%);
+  background-attachment: fixed;
+  text-align: center;
+  color: white;
+}
+
+/* LOVE ANIMATION */
+.love-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.love {
+  position: absolute;
+  color: #ff4d6d;
+  animation: floatLove linear infinite;
+}
+
+@keyframes floatLove {
+  0% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
+}
+
+/* CONTAINER */
+.container {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+p {
+  font-size: 16px;
+  max-width: 320px;
+}
+
+/* BUTTON */
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+.yes:hover {
+  transform: scale(1.1);
+}
+
+.no {
+  background: white;
+  color: black;
+  position: fixed;
+  transition: 0.2s;
+}
+</style>
+</head>
+
+<body>
+
+<div class="love-container" id="loveContainer"></div>
+
+<div class="container">
+  <h1>Hai Kamu 😊</h1>
+
+  <p>
+    Aku mau jujur sesuatu...  
+    Dari awal kenal, aku ngerasa nyaman banget sama kamu.  
+    Dan sekarang aku sadar, aku suka sama kamu ❤️
+  </p>
+
+  <h2>Mau gak jadi pacar aku? 💕</h2>
+
+  <div class="buttons">
+    <button class="yes" onclick="yes()">Mau ❤️</button>
+    <button class="no" id="noBtn" onmouseover="no()">Gak 😅</button>
+  </div>
+</div>
+love.style.leftlove.style.left
+<script>
+/* LOVE GENERATOR */
+function createLove() {
+  const love = document.createElement("div");
+  love.classList.add("love");
+  love.innerHTML = "❤️";
+
+  love.style.left = Math.random() * 100 + "vw";
+  love.style.fontSize = (16 + Math.random() * 20) + "px";
+  love.style.animationDuration = (4 + Math.random() * 3) + "s";
+
+  document.getElementById("loveContainer").appendChild(love);
+
+  setTimeout(() => {
+    love.remove();
+  }, 7000);
+}
+
+setInterval(createLove, 300);
+
+/* BUTTON NO KABUR (ANTI NIMPA TEXT) */
+function no() {
+  const btn = document.getElementById("noBtn");
+
+  const paddingTop = 250; // area aman text
+  const paddingBottom = 80;
+
+  const maxX = window.innerWidth - btn.offsetWidth;
+  const maxY = window.innerHeight - btn.offsetHeight - paddingBottom;
+
+  const randomX = Math.random() * maxX;
+  const randomY = paddingTop + Math.random() * (maxY - paddingTop);
+
+  btn.style.left = randomX + "px";
+  btn.style.top = randomY + "px";
+}
+
+/* BUTTON YES */
+function yes() {
+  document.body.innerHTML = `
+    <div style="
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      text-align:center;
+      background: linear-gradient(180deg, #ff9a9e, #fad0c4);
+      color:white;
+    ">
+      <h1>YEEEEE ❤️</h1>
+      <p>Kamu sekarang resmi jadi pacar aku 😆💕</p>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
