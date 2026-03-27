@@ -87,7 +87,7 @@ button {
 .no {
   background: white;
   color: black;
-  transition: 0.2s; /* ❌ position fixed dihapus */
+  transition: 0.2s;
 }
 </style>
 </head>
@@ -109,7 +109,10 @@ button {
 
   <div class="buttons">
     <button class="yes" onclick="yes()">Mau ❤️</button>
-    <button class="no" id="noBtn" onmouseover="no()">Gak 😅</button>
+    <button class="no" id="noBtn"
+      onmouseover="no()"
+      onclick="no()"
+      ontouchstart="no()">Gak 😅</button>
   </div>
 </div>
 
@@ -130,7 +133,7 @@ function createLove() {
 }
 setInterval(createLove, 300);
 
-/* NO BUTTON FIX */
+/* NO BUTTON (KABUR SEMUA EVENT) */
 function no() {
   const btn = document.getElementById("noBtn");
   const container = document.querySelector(".container");
@@ -150,9 +153,15 @@ function no() {
     randomY < rect.bottom + 60
   );
 
-  btn.style.position = "fixed"; // ✅ pindahin ke sini
+  btn.style.position = "fixed";
   btn.style.left = randomX + "px";
   btn.style.top = randomY + "px";
+
+  // efek biar lebih hidup
+  btn.style.transform = "scale(1.2)";
+  setTimeout(() => {
+    btn.style.transform = "scale(1)";
+  }, 150);
 }
 
 /* YES BUTTON */
