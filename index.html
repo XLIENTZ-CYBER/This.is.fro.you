@@ -87,8 +87,7 @@ button {
 .no {
   background: white;
   color: black;
-  position: fixed;
-  transition: 0.2s;
+  transition: 0.2s; /* ❌ position fixed dihapus */
 }
 </style>
 </head>
@@ -98,7 +97,6 @@ button {
 <div class="love-container" id="loveContainer"></div>
 
 <div class="container">
-  <div class="text-box">
   <h1>Hai Kamu 😊</h1>
 
   <p>
@@ -132,7 +130,7 @@ function createLove() {
 }
 setInterval(createLove, 300);
 
-/* NO BUTTON (ANTI NIMPA TEXT - AUTO DETECT) */
+/* NO BUTTON FIX */
 function no() {
   const btn = document.getElementById("noBtn");
   const container = document.querySelector(".container");
@@ -152,6 +150,7 @@ function no() {
     randomY < rect.bottom + 60
   );
 
+  btn.style.position = "fixed"; // ✅ pindahin ke sini
   btn.style.left = randomX + "px";
   btn.style.top = randomY + "px";
 }
