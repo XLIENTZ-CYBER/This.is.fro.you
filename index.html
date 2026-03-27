@@ -111,12 +111,14 @@ button {
     <button class="yes" onclick="yes()">Mau ❤️</button>
     <button class="no" id="noBtn"
       onmouseover="no()"
-      onclick="no()"
-      ontouchstart="no()">Gak 😅</button>
+      onclick="noClick()"
+      ontouchstart="noClick()">Gak 😅</button>
   </div>
 </div>
 
 <script>
+let clickCount = 0;
+
 /* LOVE */
 function createLove() {
   const love = document.createElement("div");
@@ -133,8 +135,28 @@ function createLove() {
 }
 setInterval(createLove, 300);
 
-/* NO BUTTON (KABUR SEMUA EVENT) */
+/* GERAK */
 function no() {
+  moveBtn();
+}
+
+/* KLIK */
+function noClick() {
+  clickCount++;
+  moveBtn();
+
+  if (clickCount === 5) {
+    const text = document.createElement("h2");
+    text.innerText = "SERIUSAN KAMU ENGGA MAU SAMA AKU 😭";
+    text.style.marginTop = "20px";
+    text.style.color = "white";
+
+    document.querySelector(".container").appendChild(text);
+  }
+}
+
+/* FUNCTION GERAK */
+function moveBtn() {
   const btn = document.getElementById("noBtn");
   const container = document.querySelector(".container");
 
@@ -157,7 +179,6 @@ function no() {
   btn.style.left = randomX + "px";
   btn.style.top = randomY + "px";
 
-  // efek biar lebih hidup
   btn.style.transform = "scale(1.2)";
   setTimeout(() => {
     btn.style.transform = "scale(1)";
