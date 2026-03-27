@@ -18,7 +18,7 @@ body {
   color: white;
 }
 
-/* LOVE ANIMATION */
+/* LOVE */
 .love-container {
   position: fixed;
   top: 0;
@@ -36,17 +36,9 @@ body {
 }
 
 @keyframes floatLove {
-  0% {
-    transform: translateY(100vh);
-    opacity: 0;
-  }
-  30% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-10vh);
-    opacity: 0;
-  }
+  0% { transform: translateY(100vh); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
 }
 
 /* CONTAINER */
@@ -61,10 +53,7 @@ body {
   padding: 20px;
 }
 
-h1 {
-  font-size: 30px;
-}
-
+h1 { font-size: 30px; }
 p {
   font-size: 16px;
   max-width: 320px;
@@ -124,9 +113,9 @@ button {
     <button class="no" id="noBtn" onmouseover="no()">Gak 😅</button>
   </div>
 </div>
-love.style.leftlove.style.left
+
 <script>
-/* LOVE GENERATOR */
+/* LOVE */
 function createLove() {
   const love = document.createElement("div");
   love.classList.add("love");
@@ -138,31 +127,35 @@ function createLove() {
 
   document.getElementById("loveContainer").appendChild(love);
 
-  setTimeout(() => {
-    love.remove();
-  }, 7000);
+  setTimeout(() => love.remove(), 7000);
 }
-
 setInterval(createLove, 300);
 
-/* BUTTON NO KABUR (ANTI NIMPA TEXT) */
+/* NO BUTTON (ANTI NIMPA TEXT - AUTO DETECT) */
 function no() {
   const btn = document.getElementById("noBtn");
+  const container = document.querySelector(".container");
 
-  const paddingTop = 250; // area aman text
-  const paddingBottom = 80;
+  const rect = container.getBoundingClientRect();
 
   const maxX = window.innerWidth - btn.offsetWidth;
-  const maxY = window.innerHeight - btn.offsetHeight - paddingBottom;
+  const maxY = window.innerHeight - btn.offsetHeight;
 
-  const randomX = Math.random() * maxX;
-  const randomY = paddingTop + Math.random() * (maxY - paddingTop);
+  let randomX, randomY;
+
+  do {
+    randomX = Math.random() * maxX;
+    randomY = Math.random() * maxY;
+  } while (
+    randomY > rect.top - 60 &&
+    randomY < rect.bottom + 60
+  );
 
   btn.style.left = randomX + "px";
   btn.style.top = randomY + "px";
 }
 
-/* BUTTON YES */
+/* YES BUTTON */
 function yes() {
   document.body.innerHTML = `
     <div style="
